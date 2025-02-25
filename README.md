@@ -63,7 +63,7 @@ Create a `.env` file in the `server` and `www` directories with the following:
 ### Server (.env)
 ```
 DB_URL=mongodb://mongo:27017/chatdb
-REDIS_HOST=redis
+REDIS_HOST=localhost
 REDIS_PORT=6379
 HOST_NAME=0.0.0.0
 PORT=8080
