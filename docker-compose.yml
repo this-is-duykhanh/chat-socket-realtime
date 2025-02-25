@@ -43,7 +43,7 @@ services:
 
   client:
     build:
-      context: ./client
+      context: ./www
       # container_name: chat-frontend
       dockerfile: Dockerfile
 
