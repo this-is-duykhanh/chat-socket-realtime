@@ -41,7 +41,7 @@ services:
       - /app/node_modules
     restart: always
 
-  client:
+  www:
     build:
       context: ./www
       # container_name: chat-frontend
@@ -56,7 +56,7 @@ services:
    
 
     volumes:
-      - ./client:/app
+      - ./www:/app
       - /app/node_modules
     restart: always
 

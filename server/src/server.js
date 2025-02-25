@@ -8,7 +8,7 @@ const { connectRedis } = require('./config/redis');
 const jwt = require('jsonwebtoken');
 const chatSocket = require('./sockets/chatSocket');
 const expressSession = require("express-session")
-
+require("dotenv").config();
 
 const app = express();
 
