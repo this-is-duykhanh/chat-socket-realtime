@@ -1,0 +1,65 @@
+
+services:
+  mongo:
+    image: mongo:latest
+    # container_name: chat-mongodb
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+    restart: always
+
+  redis:
+    image: redis/redis-stack-server:latest
+    # container_name: chat-redis
+    ports:
+      - "6379:6379"
+    depends_on:
+      - mongo
+    restart: always
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      # container_name: chat-backend
+    environment:
+      - DB_URL=mongodb://mongo:27017/chatdb
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - HOST_NAME=0.0.0.0
+    depends_on:
+      - mongo
+      - redis
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    restart: always
+
+  client:
+    build:
+      context: ./client
+      # container_name: chat-frontend
+      dockerfile: Dockerfile
+
+    depends_on:
+      - server
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=http://server:8080
+    ports:
+      - "3000:3000"
+   
+
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    restart: always
+
+volumes:
+  mongo-data:
+    driver: local
