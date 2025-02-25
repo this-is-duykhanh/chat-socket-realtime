@@ -32,7 +32,7 @@ Before running the project, ensure you have the following installed:
 
 3. **Frontend Setup**
    ```sh
-   cd ../client
+   cd www
    npm install
    npm run dev
    ```
@@ -58,7 +58,7 @@ Before running the project, ensure you have the following installed:
    - **Redis:** `redis://redis:6379`
 
 ## Environment Variables
-Create a `.env` file in the `server` and `client` directories with the following:
+Create a `.env` file in the `server` and `www` directories with the following:
 
 ### Server (.env)
 ```
